@@ -1,12 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import { Link } from "@radix-ui/themes";
 import { AiFillBug } from "react-icons/ai";
 import { usePathname } from "next/navigation";
-import classnames from "classnames";
 
 const Navbar = () => {
-
   const pathname = usePathname();
 
   const [mounted, setMounted] = useState(false);
@@ -23,7 +21,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="flex gap-5 border-b p-3 h-20 items-center">
-        <Link href="/">
+        <Link href="/" color="gray">
           <AiFillBug size={40} />
         </Link>
         <ul className="flex gap-3">
@@ -33,12 +31,9 @@ const Navbar = () => {
             return (
               <li key={link.name}>
                 <Link
-                  className={classnames({
-                    "bg-blue-500": isActive,
-                    "bg-gray-900": !isActive,
-                    "hover:bg-blue-500 text-white": true,
-                    "rounded p-2": true,
-                  })}
+                  weight="bold"
+                  color={isActive ? "blue" : "gray"}
+                  size="5"
                   href={link.path}
                 >
                   {link.name}

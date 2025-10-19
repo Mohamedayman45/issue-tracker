@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "./navbar";
 // @ts-ignore: Allow importing CSS without type declarations
 import "./globals.css";
+// @ts-ignore: Allow importing CSS without type declarations
+import "@radix-ui/themes/styles.css";
+import { Theme } from "@radix-ui/themes";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,8 +32,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
-        {children}
+        <Theme>
+          <Navbar />
+          {children}
+        </Theme>
       </body>
     </html>
   );
