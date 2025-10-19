@@ -6,6 +6,15 @@ import "./globals.css";
 // @ts-ignore: Allow importing CSS without type declarations
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
+import { Inter } from "next/font/google";
+// @ts-ignore: Allow importing CSS without type declarations
+import './theme.config.css';
+
+const inter = Inter({
+	subsets: ["latin"],
+	display: "swap",
+	variable: "--font-inter",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,9 +39,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased ${inter.variable}`}
       >
-        <Theme>
+        <Theme accentColor="violet" radius="large" scaling="105%" appearance="dark">
           <Navbar />
           {children}
         </Theme>

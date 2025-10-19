@@ -32,7 +32,7 @@ const Navbar = () => {
               <li key={link.name}>
                 <Link
                   weight="bold"
-                  color={isActive ? "blue" : "gray"}
+                  color={isActive ? "violet" : "gray"}
                   size="5"
                   href={link.path}
                 >
