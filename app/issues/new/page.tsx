@@ -4,11 +4,11 @@ import { TextField, Flex, Button, TextArea } from "@radix-ui/themes";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { issueSchema } from "@/app/issueSchema";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-interface IssueProps {
-  title: string;
-  description: string;
-}
+type IssueProps = z.input<typeof issueSchema>;
 
 const NewIssue = () => {
   const router = useRouter();
@@ -16,7 +16,11 @@ const NewIssue = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IssueProps>();
+  } = useForm<IssueProps>({
+    resolver: zodResolver(issueSchema),
+  });
+
+  console.log(errors);
   const onSubmit = async (data: IssueProps) => {
     try {
       await axios.post("/api/issues", data);
@@ -31,7 +35,7 @@ const NewIssue = () => {
         <TextField.Root
           variant="soft"
           placeholder="Title"
-          {...register("title", { required: true })}
+          {...register("title")}
         />
         {errors.title && (
           <span className="text-red-500">Title is required</span>
@@ -39,7 +43,7 @@ const NewIssue = () => {
         <TextArea
           variant="soft"
           placeholder="Description"
-          {...register("description", { required: true })}
+          {...register("description")}
         />
         {errors.description && (
           <span className="text-red-500">Description is required</span>
