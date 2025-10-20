@@ -18,12 +18,12 @@ const NewIssue = () => {
     formState: { errors },
   } = useForm<IssueProps>();
   const onSubmit = async (data: IssueProps) => {
-    await axios
-      .post("/api/issues", data)
-      .then(() => router.push("/issues"))
-      .catch((error) => {
-        console.error("Failed to create issue:", error);
-      });
+    try {
+      await axios.post("/api/issues", data);
+      router.push("/issues");
+    } catch (error) {
+      console.error("Failed to create issue:", error);
+    }
   };
   return (
     <div className="p-5">
@@ -33,13 +33,17 @@ const NewIssue = () => {
           placeholder="Title"
           {...register("title", { required: true })}
         />
-        {errors.title && <span className="text-red-500">Title is required</span>}
+        {errors.title && (
+          <span className="text-red-500">Title is required</span>
+        )}
         <TextArea
           variant="soft"
           placeholder="Description"
-          {...register("description" , { required: true })}
+          {...register("description", { required: true })}
         />
-        {errors.description && <span className="text-red-500">Description is required</span>}
+        {errors.description && (
+          <span className="text-red-500">Description is required</span>
+        )}
       </Flex>
       <div className="mt-3">
         <Button onClick={handleSubmit(onSubmit)}>Create Issue</Button>
