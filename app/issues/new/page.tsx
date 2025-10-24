@@ -56,7 +56,9 @@ const NewIssue = () => {
         )}
       </Flex>
       <div className="mt-3">
-        <Button onClick={handleSubmit(onSubmit)} disabled={loading}>Create Issue {loading && <Spinner />}</Button>
+        <Button onClick={handleSubmit(onSubmit)} disabled={loading}>
+          Create Issue {loading && <Spinner />}
+        </Button>
       </div>
     </div>
   );
